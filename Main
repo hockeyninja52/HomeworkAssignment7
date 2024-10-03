@@ -1,0 +1,143 @@
+package hw7;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Random random = new Random();
+		Scanner scan = new Scanner(System.in);
+		
+		int n = 100000; 
+		int x = 0;
+		int p = 0;
+		int c = 1;
+		boolean numfound = false;
+		
+		int[] randomArray = new int[n];
+		
+		while(x < n - 1) {
+			numfound = false;
+			p = random.nextInt(1000000);
+			for(int i = 0; i < n; i++) {
+				if(randomArray[i] == p) {
+					numfound = true;
+					break;
+				}
+				
+			}
+			if(!numfound) {
+				randomArray[x] = p;
+				x++;
+			}
+		}
+		
+		/*
+		for(int j = 0; j < n; j++) {
+			System.out.println(randomArray[j]);
+			}
+		*/
+		
+		long startTimeb = System.currentTimeMillis();
+		B_sort(randomArray);
+		long endTimeb = System.currentTimeMillis();
+		System.out.println("Sorting an array of " + n + " using Bubble Sort took " + (endTimeb - startTimeb) + " miliseconds to complete");
+		
+		long startTimes = System.currentTimeMillis();
+		S_sort(randomArray);
+		long endTimes = System.currentTimeMillis();
+		System.out.println("Sorting an array of " + n + " using Selection Sort took " + (endTimes - startTimes) + " miliseconds to complete");
+		
+		for(int m = 0; m < 3; m++) {
+		long startTimeI = System.currentTimeMillis();
+		I_sort(randomArray);
+		long endTimeI = System.currentTimeMillis();
+		System.out.println("Sorting an array of " + n + " using Insertion Sort take " + c + " took " + (endTimeI - startTimeI) + " miliseconds to complete");
+		c++;
+		}
+	}
+
+	public static void B_sort(int randomArray[]) {
+		//Bubble Sort
+		int temp = 0;
+		int[] B_Array = new int[randomArray.length];
+		for(int i = 0; i < randomArray.length; i++) {
+			B_Array[i] = randomArray[i];
+			//System.out.println(B_Array[i]);
+		}
+		
+		for(int j = 0; j < B_Array.length; j++) {
+			for(int l = 0; l < B_Array.length - j - 1; l++) {
+				if(B_Array[l] > B_Array[l + 1]) {
+					temp = B_Array[l];
+					B_Array[l] = B_Array[l + 1];
+					B_Array[l + 1] = temp;
+				}
+			}
+		}
+	/*	
+	for(int m = 0; m < B_Array.length; m++) {
+		System.out.println(B_Array[m]);
+		}
+	*/
+}
+
+	
+	public static void S_sort(int randomArray[]) {
+		//Selection Sort
+		int temp = 0;
+		int[] S_Array = new int[randomArray.length];
+		for(int i = 0; i < randomArray.length; i++) {
+			S_Array[i] = randomArray[i];
+			//System.out.println(S_Array[i]);
+		}
+		
+		for(int j = 0; j < S_Array.length; j++) {
+			for(int m = j + 1; m < S_Array.length; m++) {
+				if(S_Array[m] > S_Array[j]) {
+					temp = S_Array[j];
+					S_Array[j] = S_Array[m];
+					S_Array[m] = temp;
+				}
+			}
+		}
+		
+		/*
+		for(int n = 0; n < S_Array.length; n++) {
+			System.out.println(S_Array[n]);
+		}	
+		*/	
+	}
+	
+	public static void I_sort(int randomArray[]) {
+		//Insertion Sort
+		int temp = 0;
+		int j = 0;
+		
+		int[] S_Array = new int[randomArray.length];
+		
+		for(int i = 0; i < randomArray.length; i++) {
+			j = i;
+			S_Array[i] = randomArray[i];
+			//System.out.println(S_Array[i]);
+			}
+			
+		for(j = 0; j < S_Array.length; j++) {
+			while(j > 0 && S_Array[j] > S_Array[j - 1]) {
+				temp = S_Array[j];
+				S_Array[j] = S_Array[j - 1];
+				S_Array[j - 1] = temp;
+				--j;
+			}
+		}
+		/*
+		for(int m = 0; m < S_Array.length; m++) {
+			System.out.println(S_Array[m]);
+		}
+		*/
+	}
+
+}
+
